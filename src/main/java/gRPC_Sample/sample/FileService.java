@@ -23,37 +23,53 @@ public class FileService extends FileServiceImplBase  {
 
 		return new StreamObserver<FileRequest>() {
 
-			long threadId = Thread.currentThread().getId();
+			long threadId = 0;
 			String fileName = "";
+			int count = 0;
 
 			@Override
 			public void onNext(FileRequest value) {
-				System.out.println("FileService onNext start" + " ThreadId : " + threadId);
+				System.out.println("【ThreadId : " + threadId + "】" + count + " times " + "FileService onNext start");
+
+				long before = System.currentTimeMillis();
+				System.out.println("【ThreadId : " + threadId + "】" + count + " times before:" + before);
+
 				blob.add(value.getData());
 				fileName = value.getName();
-				System.out.println("FileService onNext end" + " ThreadId : " + threadId);
+				threadId = value.getId();
+				System.out.println("【ThreadId : " + threadId + "】"  + count + " times " + "FileService onNext end");
+
+				long after = System.currentTimeMillis();
+				System.out.println("【ThreadId : " + threadId + "】" + count + " times after:" + after);
+
+				System.out.println("【ThreadId : " + threadId + "】" + count + " times elapsed:" + (double) (after - before) / 1000 + " sec");
+
+				count++;
 			}
 
 			@Override
 			public void onError(Throwable t) {
-				System.out.println("FileService onError start" + " ThreadId : " + threadId);
+				System.out.println("【ThreadId : " + threadId + "】" + count + " times " + "FileService onError start");
 				t.printStackTrace();
-				System.out.println("FileService onError end" + " ThreadId : " + threadId);
+				System.out.println("【ThreadId : " + threadId + "】" + count + " times " + "FileService onError end");
 			}
 
 			@Override
 			public void onCompleted() {
 
-				System.out.println("FileService onComplete start" + " ThreadId : " + threadId);
+				System.out.println("【ThreadId : " + threadId + "】" + count + " times " + "FileService onComplete start");
+
+				long before = System.currentTimeMillis();
+				System.out.println("【ThreadId : " + threadId + "】" + count + " times before:" + before);
 
 				try(FileOutputStream out = new FileOutputStream(outDir + fileName)) {
 
 					int size = blob.stream().mapToInt(ByteString::size).sum();
-					ByteString by = blob.stream().reduce((a, b) -> {
+					ByteString bs = blob.stream().reduce((a, b) -> {
 						return a.concat(b);
 					}).get();
 
-					by.writeTo(out);
+					bs.writeTo(out);
 //					ByteString.newOutput().writeTo(out);
 					responseObserver.onNext(FileResponse.newBuilder().setSize(size).build());
 					responseObserver.onCompleted();
@@ -64,10 +80,10 @@ public class FileService extends FileServiceImplBase  {
 					// TODO 自動生成された catch ブロック
 					e.printStackTrace();
 				}
+				long after = System.currentTimeMillis();
+				System.out.println("【ThreadId : " + threadId + "】" + count + " times after:" + after);
 
-
-
-				System.out.println("FileService onComplete end" + " ThreadId : " + threadId);
+				System.out.println("【ThreadId : " + threadId + "】" + count + " times " + "FileService onComplete end. elapsed:" + (double) (after - before) / 1000);
 			}
 
 		};

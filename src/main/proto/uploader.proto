@@ -5,9 +5,11 @@ package uploader;
 message FileRequest {
     string name = 1;
     bytes data = 2;
+    int64 id = 3;
 }
 message FileResponse {
     int64 size = 1;
+    int64 id = 2;
 }
 service FileService {
     rpc Upload (stream FileRequest) returns (FileResponse);

@@ -1,26 +1,25 @@
 package gRPC_Sample.sample;
 
+import static gRPC_Sample.sample.CommonConst.*;
+
 import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+
 public class ClientMain {
 	private static ExecutorService executorService;
-
-	private static int threadCount = 3;
-//	private static String fileName = "testfile_300m_";
-	private static String fileName = "text_400m_";
 
 	public static void main(String[] args) throws InterruptedException, IOException {
 
 		long start = System.currentTimeMillis();
 		System.out.println("Start :" + start);
 
-		executorService = Executors.newFixedThreadPool(threadCount);
+		executorService = Executors.newFixedThreadPool(THREAD_COUNT);
 
-		for(int i = 0; i < threadCount; i++) {
-			executorService.submit(new ClientThread(fileName + (i + 1) + ".txt"));
+		for(int i = 0; i < THREAD_COUNT; i++) {
+			executorService.submit(new ClientThread(SEND_FILE_NAME + (i + 1) + ".txt", i));
 		}
 
 		try {
@@ -33,7 +32,7 @@ public class ClientMain {
 		long end = System.currentTimeMillis();
 		System.out.println("End : " + end);
 
-		double elapsed = (double) (start - end) / 1000;
+		double elapsed = (double) (end - start) / 1000;
 
 		System.out.println("Elapsed : " + elapsed + " sec");
 

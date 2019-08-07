@@ -32,6 +32,11 @@ public final class Uploader {
      * <code>bytes data = 2;</code>
      */
     com.google.protobuf.ByteString getData();
+
+    /**
+     * <code>int64 id = 3;</code>
+     */
+    long getId();
   }
   /**
    * Protobuf type {@code uploader.FileRequest}
@@ -89,6 +94,11 @@ public final class Uploader {
             case 18: {
 
               data_ = input.readBytes();
+              break;
+            }
+            case 24: {
+
+              id_ = input.readInt64();
               break;
             }
             default: {
@@ -166,6 +176,15 @@ public final class Uploader {
       return data_;
     }
 
+    public static final int ID_FIELD_NUMBER = 3;
+    private long id_;
+    /**
+     * <code>int64 id = 3;</code>
+     */
+    public long getId() {
+      return id_;
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -186,6 +205,9 @@ public final class Uploader {
       if (!data_.isEmpty()) {
         output.writeBytes(2, data_);
       }
+      if (id_ != 0L) {
+        output.writeInt64(3, id_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -201,6 +223,10 @@ public final class Uploader {
       if (!data_.isEmpty()) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(2, data_);
+      }
+      if (id_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(3, id_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -221,6 +247,8 @@ public final class Uploader {
           .equals(other.getName())) return false;
       if (!getData()
           .equals(other.getData())) return false;
+      if (getId()
+          != other.getId()) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -236,6 +264,9 @@ public final class Uploader {
       hash = (53 * hash) + getName().hashCode();
       hash = (37 * hash) + DATA_FIELD_NUMBER;
       hash = (53 * hash) + getData().hashCode();
+      hash = (37 * hash) + ID_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getId());
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -373,6 +404,8 @@ public final class Uploader {
 
         data_ = com.google.protobuf.ByteString.EMPTY;
 
+        id_ = 0L;
+
         return this;
       }
 
@@ -401,6 +434,7 @@ public final class Uploader {
         uploader.Uploader.FileRequest result = new uploader.Uploader.FileRequest(this);
         result.name_ = name_;
         result.data_ = data_;
+        result.id_ = id_;
         onBuilt();
         return result;
       }
@@ -455,6 +489,9 @@ public final class Uploader {
         }
         if (other.getData() != com.google.protobuf.ByteString.EMPTY) {
           setData(other.getData());
+        }
+        if (other.getId() != 0L) {
+          setId(other.getId());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -582,6 +619,32 @@ public final class Uploader {
         onChanged();
         return this;
       }
+
+      private long id_ ;
+      /**
+       * <code>int64 id = 3;</code>
+       */
+      public long getId() {
+        return id_;
+      }
+      /**
+       * <code>int64 id = 3;</code>
+       */
+      public Builder setId(long value) {
+        
+        id_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int64 id = 3;</code>
+       */
+      public Builder clearId() {
+        
+        id_ = 0L;
+        onChanged();
+        return this;
+      }
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -643,6 +706,11 @@ public final class Uploader {
      * <code>int64 size = 1;</code>
      */
     long getSize();
+
+    /**
+     * <code>int64 id = 2;</code>
+     */
+    long getId();
   }
   /**
    * Protobuf type {@code uploader.FileResponse}
@@ -694,6 +762,11 @@ public final class Uploader {
               size_ = input.readInt64();
               break;
             }
+            case 16: {
+
+              id_ = input.readInt64();
+              break;
+            }
             default: {
               if (!parseUnknownField(
                   input, unknownFields, extensionRegistry, tag)) {
@@ -735,6 +808,15 @@ public final class Uploader {
       return size_;
     }
 
+    public static final int ID_FIELD_NUMBER = 2;
+    private long id_;
+    /**
+     * <code>int64 id = 2;</code>
+     */
+    public long getId() {
+      return id_;
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -752,6 +834,9 @@ public final class Uploader {
       if (size_ != 0L) {
         output.writeInt64(1, size_);
       }
+      if (id_ != 0L) {
+        output.writeInt64(2, id_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -764,6 +849,10 @@ public final class Uploader {
       if (size_ != 0L) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(1, size_);
+      }
+      if (id_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(2, id_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -782,6 +871,8 @@ public final class Uploader {
 
       if (getSize()
           != other.getSize()) return false;
+      if (getId()
+          != other.getId()) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -796,6 +887,9 @@ public final class Uploader {
       hash = (37 * hash) + SIZE_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getSize());
+      hash = (37 * hash) + ID_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getId());
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -931,6 +1025,8 @@ public final class Uploader {
         super.clear();
         size_ = 0L;
 
+        id_ = 0L;
+
         return this;
       }
 
@@ -958,6 +1054,7 @@ public final class Uploader {
       public uploader.Uploader.FileResponse buildPartial() {
         uploader.Uploader.FileResponse result = new uploader.Uploader.FileResponse(this);
         result.size_ = size_;
+        result.id_ = id_;
         onBuilt();
         return result;
       }
@@ -1008,6 +1105,9 @@ public final class Uploader {
         if (other == uploader.Uploader.FileResponse.getDefaultInstance()) return this;
         if (other.getSize() != 0L) {
           setSize(other.getSize());
+        }
+        if (other.getId() != 0L) {
+          setId(other.getId());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -1060,6 +1160,32 @@ public final class Uploader {
       public Builder clearSize() {
         
         size_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private long id_ ;
+      /**
+       * <code>int64 id = 2;</code>
+       */
+      public long getId() {
+        return id_;
+      }
+      /**
+       * <code>int64 id = 2;</code>
+       */
+      public Builder setId(long value) {
+        
+        id_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int64 id = 2;</code>
+       */
+      public Builder clearId() {
+        
+        id_ = 0L;
         onChanged();
         return this;
       }
@@ -1135,11 +1261,12 @@ public final class Uploader {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\016uploader.proto\022\010uploader\")\n\013FileReques" +
-      "t\022\014\n\004name\030\001 \001(\t\022\014\n\004data\030\002 \001(\014\"\034\n\014FileRes" +
-      "ponse\022\014\n\004size\030\001 \001(\0032H\n\013FileService\0229\n\006Up" +
-      "load\022\025.uploader.FileRequest\032\026.uploader.F" +
-      "ileResponse(\001b\006proto3"
+      "\n\016uploader.proto\022\010uploader\"5\n\013FileReques" +
+      "t\022\014\n\004name\030\001 \001(\t\022\014\n\004data\030\002 \001(\014\022\n\n\002id\030\003 \001(" +
+      "\003\"(\n\014FileResponse\022\014\n\004size\030\001 \001(\003\022\n\n\002id\030\002 " +
+      "\001(\0032H\n\013FileService\0229\n\006Upload\022\025.uploader." +
+      "FileRequest\032\026.uploader.FileResponse(\001b\006p" +
+      "roto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -1150,13 +1277,13 @@ public final class Uploader {
     internal_static_uploader_FileRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_uploader_FileRequest_descriptor,
-        new java.lang.String[] { "Name", "Data", });
+        new java.lang.String[] { "Name", "Data", "Id", });
     internal_static_uploader_FileResponse_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_uploader_FileResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_uploader_FileResponse_descriptor,
-        new java.lang.String[] { "Size", });
+        new java.lang.String[] { "Size", "Id", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)
